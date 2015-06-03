@@ -1,5 +1,5 @@
 # QueueIT.Security-ColdFusion
-Queue-it KnownUser integration in Cold Fusion
+Queue-it KnownUser integration in ColdFusion
 
 In order to user this code please follow below steps 
 
