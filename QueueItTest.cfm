@@ -13,21 +13,21 @@ VARIABLES.queueItKnownUser = false;
 VARIABLES.queueItKnownUserHash = false;
 VARIABLES.queueItKnownUserTimestamp = false;
 
-    if(structKeyExists(URL,"qitq")
-        and structKeyExists(URL,"qitp")
-        and structKeyExists(URL,"qitts")
-        and structKeyExists(URL,"qith")
-        and len(trim(URL.qitq))
-        and len(trim(URL.qitp))
-        and len(trim(URL.qith))
-        and isNumeric(URL.qitts)
+    if(structKeyExists(URL,"q")
+        and structKeyExists(URL,"p")
+        and structKeyExists(URL,"ts")
+        and structKeyExists(URL,"h")
+        and len(trim(URL.q))
+        and len(trim(URL.p))
+        and len(trim(URL.h))
+        and isNumeric(URL.ts)
     ) {
 
     	// create queue it security object for known user verification
         VARIABLES.QueueItSecurityObj = new QueueItSecurity(
             redirectedURL = "http://#CGI.SERVER_NAME#:8500#CGI.SCRIPT_NAME#?#replaceNoCase(CGI.QUERY_STRING,'&&','&','ALL')#",
-            expectedHash = URL.qith,
-            timestamp = URL.qitts
+            expectedHash = URL.h,
+            timestamp = URL.ts
         );
         
        
