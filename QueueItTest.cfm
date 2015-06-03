@@ -8,11 +8,10 @@
 <cfdump var = "This is Coldfusion Queue-IT Known User Implementation Sample" />
 
 <cfscript>
-	
-VARIABLES.queueItKnownUser = false;
+
+
 VARIABLES.queueItKnownUserHash = false;
 VARIABLES.queueItKnownUserTimestamp = false;
-
     if(structKeyExists(URL,"q")
         and structKeyExists(URL,"p")
         and structKeyExists(URL,"ts")
@@ -22,10 +21,9 @@ VARIABLES.queueItKnownUserTimestamp = false;
         and len(trim(URL.h))
         and isNumeric(URL.ts)
     ) {
-
     	// create queue it security object for known user verification
         VARIABLES.QueueItSecurityObj = new QueueItSecurity(
-            redirectedURL = GetPageContext().GetRequest().GetRequestUrl().Append("?" & objRequest.GetQueryString()).ToString(),
+            redirectedURL = GetPageContext().GetRequest().GetRequestUrl().Append("?" & GetPageContext().GetRequest().GetQueryString()).ToString(),
             expectedHash = URL.h,
             timestamp = URL.ts
         );
@@ -36,9 +34,7 @@ if(VARIABLES.QueueItSecurityObj.verifyMd5Hash()) {
 if(VARIABLES.QueueItSecurityObj.verifyTimestamp()) {
             VARIABLES.queueItKnownUserTimestamp = true;
         }
-
     }
-
     // if not a known user, redirect to queue it else store the queue number in session
     if(VARIABLES.queueItKnownUser eq false) {
     	// redirect to queue it
@@ -46,15 +42,12 @@ if(VARIABLES.QueueItSecurityObj.verifyTimestamp()) {
     else {
         
     	// Valid user....
-
     }
-
 </cfscript>
 
 
 <cfdump var = "#QueueItSecurityObj#"  />
 
-<cfdump var = "[Is this user known : #queueItKnownUser# ]"  />
 
 <cfdump var = "[Is this user known Hash : #queueItKnownUserHash# ]"  />
 
