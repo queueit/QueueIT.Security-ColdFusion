@@ -25,12 +25,11 @@ VARIABLES.queueItKnownUserTimestamp = false;
 
     	// create queue it security object for known user verification
         VARIABLES.QueueItSecurityObj = new QueueItSecurity(
-            redirectedURL = "http://#CGI.SERVER_NAME#:8500#CGI.SCRIPT_NAME#?#replaceNoCase(CGI.QUERY_STRING,'&&','&','ALL')#",
+            redirectedURL = GetPageContext().GetRequest().GetRequestUrl().Append("?" & objRequest.GetQueryString()).ToString(),
             expectedHash = URL.h,
             timestamp = URL.ts
         );
         
-       
 if(VARIABLES.QueueItSecurityObj.verifyMd5Hash()) {
             VARIABLES.queueItKnownUserHash = true;
         }
